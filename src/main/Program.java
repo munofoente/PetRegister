@@ -1,10 +1,16 @@
 package main;
 
 
+import model.entities.Pet;
+import model.enums.Gender;
+import model.enums.Kind;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -47,6 +53,32 @@ public class Program {
                 option = sc.nextInt();
                 switch (option) {
                     case 1:
+                        readFile();
+                        System.out.println();
+
+                        sc.nextLine();
+                        String name = sc.nextLine();
+                        String[] arrName = name.split(" ", 2);
+
+                        String kindStr = sc.next().toUpperCase();
+                        Kind kind = Kind.valueOf(kindStr);
+                        String genderStr = sc.next().toUpperCase();
+                        Gender gender = Gender.valueOf(genderStr);
+                        sc.nextLine();
+                        String address = sc.nextLine();
+                        String[] arrAddress = address.split(",", 3);
+
+                        float age = sc.nextFloat();
+
+                        double weight = sc.nextDouble();
+
+                        String breed = sc.next();
+
+                        Pet pet = new Pet(kind, gender, arrName, age, arrAddress, weight, breed);
+                        List<Pet> petList = new ArrayList<>();
+                        petList.add(pet);
+
+                        System.out.println(petList);
 
                     case 2:
 

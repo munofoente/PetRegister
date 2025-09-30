@@ -3,26 +3,26 @@ package model.entities;
 import model.enums.Gender;
 import model.enums.Kind;
 
+import java.util.Arrays;
+
 
 public class Pet {
 
     private Kind kind;
     private Gender gender;
-    private String name, lastName;
+    private String[] name;
     private Float age;
-    private String address, district;
+    private String[] address;
     private Double weight;
     private String breed;
 
 
-    public Pet(Kind kind, Gender gender, String name, String lastName, Float age, String address, String district, Double weight, String breed) {
+    public Pet(Kind kind, Gender gender, String[] name, Float age, String[] address, Double weight, String breed) {
         this.kind = kind;
         this.gender = gender;
         this.name = name;
-        this.lastName = lastName;
         this.age = age;
         this.address = address;
-        this.district = district;
         this.weight = weight;
         this.breed = breed;
     }
@@ -44,20 +44,12 @@ public class Pet {
         this.gender = gender;
     }
 
-    public String getName() {
+    public String[] getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String[] name) {
         this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public Float getAge() {
@@ -68,20 +60,12 @@ public class Pet {
         this.age = age;
     }
 
-    public String getAddress() {
+    public String[] getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String[] address) {
         this.address = address;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
     }
 
     public Double getWeight() {
@@ -98,5 +82,18 @@ public class Pet {
 
     public void setBreed(String breed) {
         this.breed = breed;
+    }
+
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "kind=" + kind +
+                ", gender=" + gender +
+                ", name='" + Arrays.toString(name) + '\'' +
+                ", age=" + age +
+                ", address='" + Arrays.toString(address) + '\'' +
+                ", weight=" + weight +
+                ", breed='" + breed + '\'' +
+                '}';
     }
 }
