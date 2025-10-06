@@ -4,6 +4,7 @@ package main;
 import model.entities.Pet;
 import model.enums.Gender;
 import model.enums.Kind;
+import model.exceptions.DomainException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class Program {
+public class PetRegister {
 
     public static void readFile() {
         try (BufferedReader br = new BufferedReader(new FileReader("c:\\Users\\munof\\IdeaProjects\\PetRegister\\src\\resources\\form.txt"))) {
@@ -39,6 +40,43 @@ public class Program {
         );
     }
 
+    public static boolean onlyLetters(String s){
+        return s.matches("[a-z A-Z]+");
+    }
+
+    public static void register(){
+
+        Scanner sc = new Scanner(System.in);
+
+        String name = sc.nextLine();
+        if (!onlyLetters(name)) {
+            throw new DomainException("Invalid input");
+        }
+        String[] arrName = name.split(" ", 2);
+        if (arrName.length <= 2){
+            throw new DomainException("Last name required for registration");
+        }
+
+        String kindStr = sc.next().toUpperCase();
+        Kind kind = Kind.valueOf(kindStr);
+        String genderStr = sc.next().toUpperCase();
+        Gender gender = Gender.valueOf(genderStr);
+        sc.nextLine();
+        String address = sc.nextLine();
+        String[] arrAddress = address.split(",", 3);
+        float age = sc.nextFloat();
+        double weight = sc.nextDouble();
+        String breed = sc.next();
+
+        Pet pet = new Pet(kind, gender, arrAddress, age, arrName, weight, breed);
+        List<Pet> petList = new ArrayList<>();
+        petList.add(pet);
+
+        System.out.println(petList);
+
+        sc.close();
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -53,32 +91,15 @@ public class Program {
                 option = sc.nextInt();
                 switch (option) {
                     case 1:
+
                         readFile();
                         System.out.println();
 
-                        sc.nextLine();
-                        String name = sc.nextLine();
-                        String[] arrName = name.split(" ", 2);
-
-                        String kindStr = sc.next().toUpperCase();
-                        Kind kind = Kind.valueOf(kindStr);
-                        String genderStr = sc.next().toUpperCase();
-                        Gender gender = Gender.valueOf(genderStr);
-                        sc.nextLine();
-                        String address = sc.nextLine();
-                        String[] arrAddress = address.split(",", 3);
-
-                        float age = sc.nextFloat();
-
-                        double weight = sc.nextDouble();
-
-                        String breed = sc.next();
-
-                        Pet pet = new Pet(kind, gender, arrName, age, arrAddress, weight, breed);
-                        List<Pet> petList = new ArrayList<>();
-                        petList.add(pet);
-
-                        System.out.println(petList);
+                        try {
+                            register();
+                        } catch (DomainException e){
+                            System.out.println("Input error: " + e.getMessage());
+                        }
 
                     case 2:
 
