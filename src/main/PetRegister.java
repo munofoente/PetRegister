@@ -53,7 +53,7 @@ public class PetRegister {
             throw new DomainException("Invalid input");
         }
         String[] arrName = name.split(" ", 2);
-        if (arrName.length <= 2){
+        if (arrName.length < 2){
             throw new DomainException("Last name required for registration");
         }
 
@@ -68,7 +68,7 @@ public class PetRegister {
         double weight = sc.nextDouble();
         String breed = sc.next();
 
-        Pet pet = new Pet(kind, gender, arrAddress, age, arrName, weight, breed);
+        Pet pet = new Pet(kind, gender, arrName, age, arrAddress, weight, breed);
         List<Pet> petList = new ArrayList<>();
         petList.add(pet);
 
