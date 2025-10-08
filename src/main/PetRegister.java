@@ -48,6 +48,7 @@ public class PetRegister {
 
         Scanner sc = new Scanner(System.in);
 
+        System.out.print("1 - ");
         String name = sc.nextLine();
         if (!onlyLetters(name)) {
             throw new DomainException("Invalid input");
@@ -57,15 +58,31 @@ public class PetRegister {
             throw new DomainException("Last name required for registration");
         }
 
+        System.out.print("2 - ");
         String kindStr = sc.next().toUpperCase();
         Kind kind = Kind.valueOf(kindStr);
+
+        System.out.print("3 - ");
         String genderStr = sc.next().toUpperCase();
         Gender gender = Gender.valueOf(genderStr);
+
         sc.nextLine();
-        String address = sc.nextLine();
-        String[] arrAddress = address.split(",", 3);
-        float age = sc.nextFloat();
+        System.out.print("4 - ");
+        System.out.print("i - House number: ");
+        String number = sc.nextLine();
+        System.out.print("ii - City: ");
+        String city = sc.nextLine();
+        System.out.print("iii - Street: ");
+        String street = sc.nextLine();
+        String[] arrAddress = {number, city, street};
+
+        System.out.print("5 - ");
+        double age = sc.nextFloat();
+
+        System.out.print("6 - ");
         double weight = sc.nextDouble();
+
+        System.out.print("7 - ");
         String breed = sc.next();
 
         Pet pet = new Pet(kind, gender, arrName, age, arrAddress, weight, breed);
