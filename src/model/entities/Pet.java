@@ -11,13 +11,13 @@ public class Pet {
     private Kind kind;
     private Gender gender;
     private String[] name;
-    private Float age;
+    private Double age;
     private String[] address;
     private Double weight;
     private String breed;
 
 
-    public Pet(Kind kind, Gender gender, String[] name, Float age, String[] address, Double weight, String breed) {
+    public Pet(Kind kind, Gender gender, String[] name, Double age, String[] address, Double weight, String breed) {
         this.kind = kind;
         this.gender = gender;
         this.name = name;
@@ -52,11 +52,11 @@ public class Pet {
         this.name = name;
     }
 
-    public Float getAge() {
+    public Double getAge() {
         return age;
     }
 
-    public void setAge(Float age) {
+    public void setAge(Double age) {
         this.age = age;
     }
 
