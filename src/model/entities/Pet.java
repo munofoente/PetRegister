@@ -86,14 +86,13 @@ public class Pet {
 
     @Override
     public String toString() {
-        return "Pet{" +
-                "kind=" + kind +
-                ", gender=" + gender +
-                ", name='" + Arrays.toString(name) + '\'' +
-                ", age=" + age +
-                ", address='" + Arrays.toString(address) + '\'' +
-                ", weight=" + weight +
-                ", breed='" + breed + '\'' +
-                '}';
+        return " - Pet - \n" +
+                "Kind: " + kind + "\n" +
+                "Gender: " + gender + "\n" +
+                "Name: " + Arrays.toString(name) + "\n" +
+                "Age: " + age + "\n" +
+                "Address: " + Arrays.toString(address) + "\n" +
+                "Weight: " + weight + "\n" +
+                "Breed: " + breed + "\n";
     }
 }
