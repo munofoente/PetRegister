@@ -9,10 +9,7 @@ import model.exceptions.DomainException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class PetRegister {
@@ -77,10 +74,20 @@ public class PetRegister {
         String[] arrAddress = {number, city, street};
 
         System.out.print("5 - ");
-        double age = sc.nextFloat();
+        String strAge = sc.next();
+        String valAge = strAge.replace("," , ".");
+        double age = Double.parseDouble(valAge);
+        if (age > 20){
+            throw new DomainException("Age must be below 20");
+        }
 
         System.out.print("6 - ");
-        double weight = sc.nextDouble();
+        String strWeight = sc.next();
+        String valWeight = strWeight.replace("," , ".");
+        double weight = Double.parseDouble(valWeight);
+        if (weight > 60 || weight < 0.5){
+            throw new DomainException("Weight must be between 0.5kg and 60kg");
+        }
 
         System.out.print("7 - ");
         String breed = sc.next();
@@ -114,7 +121,14 @@ public class PetRegister {
 
                         try {
                             register();
-                        } catch (DomainException e){
+                        }
+                        catch (InputMismatchException e){
+                            System.out.println("Invalid input: " + e.getMessage());
+                        }
+                        catch (NumberFormatException e){
+                            System.out.println("Invalid number format: " + e.getMessage());
+                        }
+                        catch (DomainException e){
                             System.out.println("Input error: " + e.getMessage());
                         }
 
