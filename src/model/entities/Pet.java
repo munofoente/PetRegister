@@ -2,7 +2,9 @@ package model.entities;
 
 import model.enums.Gender;
 import model.enums.Kind;
+import model.exceptions.DomainException;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 
@@ -16,6 +18,9 @@ public class Pet {
     private Double weight;
     private String breed;
 
+    public Pet(){
+
+    }
 
     public Pet(Kind kind, Gender gender, String[] name, Double age, String[] address, Double weight, String breed) {
         this.kind = kind;
@@ -52,7 +57,19 @@ public class Pet {
         this.name = name;
     }
 
-    public Double getAge() {
+    public Double getAge(String strAge) {
+        double age;
+        if (strAge.matches("^[0-9]* months$") || strAge.matches("^[0-9]* month$")){
+            String valAge = strAge.replaceAll("[a-z A-Z]+", "");
+            double ageDouble = Double.parseDouble(valAge);
+            age = ageDouble / 12;
+        } else {
+            String valAge = strAge.replace("," , ".");
+            age = Double.parseDouble(valAge);
+        }
+        if (age > 20){
+            throw new DomainException("Age must be below 20");
+        }
         return age;
     }
 
@@ -90,9 +107,9 @@ public class Pet {
                 "Kind: " + kind + "\n" +
                 "Gender: " + gender + "\n" +
                 "Name: " + Arrays.toString(name) + "\n" +
-                "Age: " + age + "\n" +
+                "Age: " + String.format("%.1f", age) + "years \n" +
                 "Address: " + Arrays.toString(address) + "\n" +
-                "Weight: " + weight + "\n" +
+                "Weight: " + weight + "kg \n" +
                 "Breed: " + breed + "\n";
     }
 }
