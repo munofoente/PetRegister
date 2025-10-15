@@ -37,19 +37,21 @@ public class PetRegister {
         );
     }
 
-    public static boolean onlyLetters(String s){
-        return s.matches("[a-z A-Z]+");
+    public static void onlyLetters(String s){
+        boolean onlyLetters = s.matches("[a-z A-Z]+");
+        if (!onlyLetters) {
+            throw new DomainException("Invalid input");
+        }
     }
 
     public static void register(){
 
         Scanner sc = new Scanner(System.in);
 
+        Pet pet = new Pet();
         System.out.print("1 - ");
         String name = sc.nextLine();
-        if (!onlyLetters(name)) {
-            throw new DomainException("Invalid input");
-        }
+        onlyLetters(name);
         String[] arrName = name.split(" ", 2);
         if (arrName.length < 2){
             throw new DomainException("Last name required for registration");
@@ -74,12 +76,8 @@ public class PetRegister {
         String[] arrAddress = {number, city, street};
 
         System.out.print("5 - ");
-        String strAge = sc.next();
-        String valAge = strAge.replace("," , ".");
-        double age = Double.parseDouble(valAge);
-        if (age > 20){
-            throw new DomainException("Age must be below 20");
-        }
+        String strAge = sc.nextLine();
+        double age = pet.getAge(strAge);
 
         System.out.print("6 - ");
         String strWeight = sc.next();
@@ -91,8 +89,9 @@ public class PetRegister {
 
         System.out.print("7 - ");
         String breed = sc.next();
+        onlyLetters(breed);
 
-        Pet pet = new Pet(kind, gender, arrName, age, arrAddress, weight, breed);
+        pet = new Pet(kind, gender, arrName, age, arrAddress, weight, breed);
         List<Pet> petList = new ArrayList<>();
         petList.add(pet);
 
