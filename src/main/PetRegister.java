@@ -37,7 +37,7 @@ public class PetRegister {
         );
     }
 
-    public static void onlyLetters(String s){
+    public static void inputCheck(String s){
         boolean onlyLetters = s.matches("[a-z A-Z]+");
         if (!onlyLetters) {
             throw new DomainException("Invalid input");
@@ -48,14 +48,18 @@ public class PetRegister {
 
         Scanner sc = new Scanner(System.in);
 
+        final String NOT_INFORMED = "Not informed";
         Pet pet = new Pet();
         System.out.print("1 - ");
         String name = sc.nextLine();
-        onlyLetters(name);
-        String[] arrName = name.split(" ", 2);
-        if (arrName.length < 2){
-            throw new DomainException("Last name required for registration");
+        String[] arrName;
+        if (!name.isEmpty()){
+            arrName = pet.getName(name);
+            inputCheck(name);
+        } else{
+            arrName = new String[]{NOT_INFORMED};
         }
+
 
         System.out.print("2 - ");
         String kindStr = sc.next().toUpperCase();
@@ -89,7 +93,7 @@ public class PetRegister {
 
         System.out.print("7 - ");
         String breed = sc.next();
-        onlyLetters(breed);
+        inputCheck(breed);
 
         pet = new Pet(kind, gender, arrName, age, arrAddress, weight, breed);
         List<Pet> petList = new ArrayList<>();
