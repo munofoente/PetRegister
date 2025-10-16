@@ -49,8 +49,13 @@ public class Pet {
         this.gender = gender;
     }
 
-    public String[] getName() {
-        return name;
+    public String[] getName(String name) {
+        String[] arrName;
+        arrName = name.split(" ", 2);
+        if (arrName.length < 2){
+            throw new DomainException("Last name required for registration");
+        }
+        return arrName;
     }
 
     public void setName(String[] name) {
@@ -107,7 +112,7 @@ public class Pet {
                 "Kind: " + kind + "\n" +
                 "Gender: " + gender + "\n" +
                 "Name: " + Arrays.toString(name) + "\n" +
-                "Age: " + String.format("%.1f", age) + "years \n" +
+                "Age: " + String.format("%.1f", age) + " years \n" +
                 "Address: " + Arrays.toString(address) + "\n" +
                 "Weight: " + weight + "kg \n" +
                 "Breed: " + breed + "\n";
