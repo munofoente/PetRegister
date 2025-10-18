@@ -52,7 +52,7 @@ public class Pet {
     public String[] getName(String name) {
         String[] arrName;
         arrName = name.split(" ", 2);
-        if (arrName.length < 2){
+        if (arrName.length < 2) {
             throw new DomainException("Last name required for registration");
         }
         return arrName;
@@ -63,23 +63,23 @@ public class Pet {
     }
 
     public Double getAge(String strAge) {
-        double age;
-        if (strAge.matches("^[0-9]* months$") || strAge.matches("^[0-9]* month$")){
-            String valAge = strAge.replaceAll("[a-z A-Z]+", "");
-            double ageDouble = Double.parseDouble(valAge);
-            age = ageDouble / 12;
-        } else {
-            String valAge = strAge.replace("," , ".");
-            age = Double.parseDouble(valAge);
+            double age;
+            if (strAge.matches("^[0-9]* months$") || strAge.matches("^[0-9]* month$")) {
+                String valAge = strAge.replaceAll("[a-z A-Z]+", "");
+                double ageDouble = Double.parseDouble(valAge);
+                age = ageDouble / 12;
+            } else {
+                String valAge = strAge.replace(",", ".");
+                age = Double.parseDouble(valAge);
+            }
+            if (age > 20) {
+                throw new DomainException("Age must be below 20");
+            }
+            return age;
         }
-        if (age > 20){
-            throw new DomainException("Age must be below 20");
-        }
-        return age;
-    }
 
-    public void setAge(Double age) {
-        this.age = age;
+    public void setAge(double age) {
+            this.age = age;
     }
 
     public String[] getAddress() {
