@@ -38,27 +38,26 @@ public class PetRegister {
     }
 
     public static void inputCheck(String s){
-        boolean onlyLetters = s.matches("[a-z A-Z]+");
-        if (!onlyLetters) {
-            throw new DomainException("Invalid input");
+        if(!s.isEmpty()){
+            boolean onlyLetters = s.matches("[a-z A-Z]+");
+            if (!onlyLetters) {
+                throw new DomainException("Invalid input");
+            }
         }
     }
 
+    public static final String NOT_INFORMED = "Not informed";
     public static void register(){
 
         Scanner sc = new Scanner(System.in);
 
-        final String NOT_INFORMED = "Not informed";
+
         Pet pet = new Pet();
         System.out.print("1 - ");
         String name = sc.nextLine();
         String[] arrName;
-        if (!name.isEmpty()){
-            arrName = pet.getName(name);
-            inputCheck(name);
-        } else{
-            arrName = new String[]{NOT_INFORMED};
-        }
+        arrName = pet.getName(name);
+        inputCheck(name);
 
 
         System.out.print("2 - ");
