@@ -4,7 +4,7 @@ import model.enums.Gender;
 import model.enums.Kind;
 import model.exceptions.DomainException;
 
-import java.text.DecimalFormat;
+
 import java.util.Arrays;
 
 
@@ -52,14 +52,12 @@ public class Pet {
     public String[] getName(String name) {
         String[] arrName;
         arrName = name.split(" ", 2);
-        if(name.isEmpty()){
-            return arrName;
-        } else {
+        if (!name.isEmpty()) {
             if (arrName.length < 2) {
                 throw new DomainException("Last name required for registration");
             }
-            return arrName;
         }
+        return arrName;
     }
 
     public void setName(String[] name) {
