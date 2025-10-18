@@ -52,10 +52,14 @@ public class Pet {
     public String[] getName(String name) {
         String[] arrName;
         arrName = name.split(" ", 2);
-        if (arrName.length < 2) {
-            throw new DomainException("Last name required for registration");
+        if(name.isEmpty()){
+            return arrName;
+        } else {
+            if (arrName.length < 2) {
+                throw new DomainException("Last name required for registration");
+            }
+            return arrName;
         }
-        return arrName;
     }
 
     public void setName(String[] name) {
